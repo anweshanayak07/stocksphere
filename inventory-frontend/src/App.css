@@ -1,0 +1,182 @@
+.nav-brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.nav-logo {
+  height: 150px;
+  margin-right: 16px;
+  border-radius: 6px;
+  /* Soft rounding */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.nav-logo:hover {
+  transform: scale(1.05);
+}
+
+/* General Layout helpers */
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  background: #1E293B;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.search-container>div {
+  width: 100%;
+}
+
+.search-input,
+.category-select {
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface);
+  transition: var(--transition);
+  font-size: 0.95rem;
+  color: var(--text-main);
+  box-shadow: var(--shadow-sm);
+}
+
+.search-input:focus,
+.category-select:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  background: var(--surface);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: var(--shadow-hover), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  animation: modalScaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-close-modal {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #1E293B;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.btn-close-modal:hover {
+  background: #334155;
+  color: #ef4444;
+  transform: rotate(90deg);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Global Table Styles */
+table,
+.issue-history-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 10px;
+}
+
+table th,
+.issue-history-table th {
+  text-align: left;
+  padding: 14px 16px;
+  background: #1E293B;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #38bdf8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--border);
+}
+
+table td,
+.issue-history-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+  transition: var(--transition);
+  color: var(--text-main);
+}
+
+table tbody tr,
+.issue-history-table tbody tr {
+  transition: var(--transition);
+}
+
+table tbody tr:hover,
+.issue-history-table tbody tr:hover {
+  background-color: #1E293B;
+}
+
+.issue-history-section {
+  padding: 30px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  margin-top: 30px;
+  animation: fadeIn 0.4s ease;
+}

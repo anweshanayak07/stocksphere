@@ -1,0 +1,114 @@
+.login-container {
+    width: 100%;
+    color: var(--text-main);
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 1.8rem;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+}
+
+.auth-toggle {
+    display: flex;
+    background: #020617; /* Very dark background for the toggle track */
+    border-radius: var(--radius-sm);
+    padding: 4px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.95rem;
+}
+
+.toggle-btn:hover {
+    color: var(--text-main);
+}
+
+.toggle-btn.active {
+    background: #1E293B;
+    color: var(--text-main);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    font-weight: 600;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.input-group input {
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background-color: #0F172A;
+    color: var(--text-main);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.auth-submit {
+    margin-top: 10px;
+    padding: 12px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.auth-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.auth-message {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+}
+
+.auth-message.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.auth-message.success {
+    background: rgba(16, 185, 129, 0.1);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}

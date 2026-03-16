@@ -1,0 +1,13 @@
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"npm run start-frontend\" \"npm run dev-backend\"",
+    "start-frontend": "npm start --prefix inventory-frontend",
+    "dev-backend": "npm run dev --prefix inventory-backend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.10"
+  }
+}

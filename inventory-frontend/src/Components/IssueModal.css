@@ -1,0 +1,72 @@
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-container{
+    background:linear-gradient(145deg,#1e272e, #2d3436);
+    padding: 25px 35px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    color: #dfe6e9;
+    border: 1px solid rgba(0,255,157,0.3);
+    box-shadow: 0 0 20px rgba(0,255,157,0.25);
+}
+.modal h3{
+   text-align: center;
+   color: #00ff9d;
+   text-transform: uppercase;
+   margin-bottom: 18px;
+   font-size: 18px;
+   letter-spacing: 1px;
+}
+.modal input{
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,255,157,0.2);
+    margin-bottom: 14px;
+    background-color: #2f3640;
+    color: #dfe6e9;
+}
+.modal input:focus{
+    outline: none;
+    box-shadow: 0 0 10px rgba(0,255,157,0.4);
+}
+/*Buttons*/
+.modal-actions{
+    display: flex;
+    justify-content: space-between;
+}
+.modal-actions button{
+    flex: 1;
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.modal-actions button .confirm{
+    background-color: #00ff9d;
+    color: #000;
+}
+.modal-actions button .confirm:hover{
+    background-color: #00b894;
+}
+.modal-actions button.cancel{
+    background: #d63031;
+    color: #fff;
+}
+.modal-actions button.cancel:hover{
+    background: #ff7675;
+}
