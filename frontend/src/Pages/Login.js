@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './Login.css';
+import api from "../api";
 
 const Login = ({ setUser }) => {
     const [isLogin, setIsLogin] = useState(true);
@@ -18,13 +19,12 @@ const Login = ({ setUser }) => {
         const endpoint = isLogin ? "/api/auth/login" : "/api/auth/register";
 
         try {
-            const res = await fetch(`http://localhost:5000${endpoint}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password }),
-            });
+            const res = await api.post(endpoint, {
+            username,
+            password,
+        });
 
-            const data = await res.json();
+        const data = res.data;
             
             if (!res.ok) {
                 setError(data.error || "An error occurred");
@@ -43,8 +43,12 @@ const Login = ({ setUser }) => {
                 setPassword("");
             }
         } catch (err) {
-            setError(isLogin ? "Login failed. Please try again" : "Registration failed.");
-            console.log("Auth error:", err);
+            setError(
+                err.response?.data?.error ||
+                err.response?.data?.detail ||
+                (isLogin ? "Login failed. Please try again." : "Registration failed.")
+            );
+            console.error("Auth error:", err);
         } finally {
             setIsLoading(false);
         }
