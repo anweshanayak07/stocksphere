@@ -53,23 +53,19 @@ StockSphere is a modern, high-performance, full-stack inventory management syste
 StockSphere uses a clean, decoupling architecture separating the visual presentation client from the transactional API layer:
 
 ```mermaid
-graph TD
-    subgraph Client Layer (React.js Frontend)
-        UI[React Components] --> Axios[Axios HTTP Client]
-    end
+flowchart TD
 
-    subgraph Service Layer (FastAPI Backend)
-        Axios --> Router[FastAPI Routers]
-        Router --> Auth[Auth Dependencies / JWT]
-        Router --> Schemas[Pydantic Validation Schemas]
-        Router --> Controllers[Business & Transaction Logic]
-    end
+    A["React Frontend"] -->|Axios REST API| B["FastAPI"]
 
-    subgraph Data Access Layer
-        Controllers --> ORM[SQLAlchemy 2.0 ORM]
-        ORM --> DB[(PostgreSQL / SQLite Database)]
-        Alembic[Alembic Migrations] --> DB
-    end
+    B --> C["JWT Authentication"]
+    B --> D["Business Logic"]
+    B --> E["Pydantic Validation"]
+
+    D --> F["SQLAlchemy ORM"]
+
+    F --> G[("PostgreSQL")]
+
+    H["Alembic Migrations"] --> G
 ```
 
 ---
