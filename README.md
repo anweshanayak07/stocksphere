@@ -160,7 +160,7 @@ stocksphere/
 cd backend
 
 # Create & activate virtual environment (first time only)
-python -m venv venv312
+python -m venv venv
 venv312\Scripts\activate        # Windows
 # source venv312/bin/activate   # macOS / Linux
 
@@ -215,7 +215,7 @@ npm run test-backend
 Or directly using pytest inside the virtual environment:
 ```bash
 cd backend
-venv312\Scripts\python -m pytest tests/ -v
+venv\Scripts\python -m pytest tests/ -v
 ```
 
 ---
