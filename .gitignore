@@ -1,1 +1,14 @@
-node_modules
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+venv/
+venv312/
+*.log
+*.db
+.env
+backend/.env
+build/
+dist/
+*.egg-info/

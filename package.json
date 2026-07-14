@@ -1,13 +1,14 @@
 {
-  "name": "my-app",
-  "version": "1.0.0",
+  "name": "stocksphere",
+  "version": "2.0.0",
+  "description": "StockSphere Inventory Management – React frontend + FastAPI backend",
   "scripts": {
-    "start": "concurrently \"npm run start-frontend\" \"npm run dev-backend\"",
-    "start-frontend": "npm start --prefix inventory-frontend",
-    "dev-backend": "npm run dev --prefix inventory-backend"
+    "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
+    "start-frontend": "npm start --prefix frontend",
+    "start-backend": "cd backend && venv312\\Scripts\\python -m uvicorn app.main:app --host 0.0.0.0 --port 5000 --reload",
+    "test-backend": "cd backend && venv312\\Scripts\\python -m pytest tests/ -v"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "nodemon": "^3.1.10"
+    "concurrently": "^8.2.2"
   }
 }

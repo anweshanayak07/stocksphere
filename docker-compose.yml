@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: stocksphere-db
+    environment:
+      POSTGRES_USER: inventory_user
+      POSTGRES_PASSWORD: VECTRA_SECURE_PASSWORD
+      POSTGRES_DB: inventory_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+  backend:
+    build: ./backend
+    container_name: stocksphere-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://inventory_user:VECTRA_SECURE_PASSWORD@db:5432/inventory_db
+      - JWT_SECRET=vectra_super_secure_jwt_secret_key_change_me
+      - JWT_ALGORITHM=HS256
+      - JWT_EXPIRE_HOURS=8
+      - PORT=5000
+    depends_on:
+      - db
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: stocksphere-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  pgdata:
