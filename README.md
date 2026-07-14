@@ -30,11 +30,13 @@ StockSphere is a modern, high-performance, full-stack inventory management syste
 ## Tech Stack
 
 ### Frontend
+
 - **Framework**: React.js (v19) - Built using functional components, state management hooks (`useState`, `useEffect`), and error boundaries.
 - **Styling**: Custom Premium Vanilla CSS design system featuring curated palettes, Outfit/Inter typography, glassmorphism layouts, micro-animations, and complete responsive design.
 - **API Client**: Axios - Integrated with an instances helper client for path mappings, base URL configurations, and request proxying.
 
 ### Backend
+
 - **Framework**: FastAPI - High-performance asynchronous Python web framework providing automatic Swagger UI/ReDoc OpenAPI documentation.
 - **Database ORM**: SQLAlchemy 2.0 - Declarative mapping style utilizing session management, eager relations (`joinedload`), and transaction rollbacks.
 - **Data Validation & Settings**: Pydantic v2 & `pydantic-settings` - Robust input/output schemas with static validation constraints and dynamic `.env` configuration mapping.
@@ -42,6 +44,7 @@ StockSphere is a modern, high-performance, full-stack inventory management syste
 - **Testing**: Pytest & `pytest-asyncio` - Extensive transactional testing coverage using isolated in-memory SQLite instances.
 
 ### Security & Utilities
+
 - **Hashing & Authentication**: bcrypt & python-jose - Strong password hashing using salt rounds alongside JSON Web Tokens (JWT) for secure authentication.
 - **Rate Limiting**: slowapi - Rate limiting middleware applied selectively (e.g. `5 requests/minute` on auth endpoints) to prevent brute-force attacks.
 - **Task Runner**: concurrently - Development tool orchestration starting frontend Npm servers and backend Uvicorn processes simultaneously.
@@ -109,7 +112,7 @@ erDiagram
 1. **`users`**: Manages credential hashing and roles (`admin`, `user`).
 2. **`items`**: Tracks core inventory parameters, storage locations, minimum quantity thresholds, and current stock status.
 3. **`issues`**: Logs historical stock flows (type `ISSUE` or `REPLENISH`). Includes index-optimized foreign keys to the `items` table.
-   
+
 Note: StockSphere uses PostgreSQL as the main database for application runtime, and uses SQLite for local isolated unit testing (`pytest`).
 
 ---
@@ -144,11 +147,11 @@ stocksphere/
 
 ## Prerequisites
 
-| Tool | Version |
-|------|---------|
-| Python | 3.12+ |
-| Node.js | 18+ |
-| npm | 9+ |
+| Tool    | Version |
+| ------- | ------- |
+| Python  | 3.12+   |
+| Node.js | 18+     |
+| npm     | 9+      |
 
 ---
 
@@ -189,6 +192,7 @@ npm start
 ```
 
 This runs:
+
 - **React dev server** → [http://localhost:3000](http://localhost:3000)
 - **FastAPI backend** → [http://localhost:5000](http://localhost:5000)
 - **Swagger UI (API docs)** → [http://localhost:5000/docs](http://localhost:5000/docs)
@@ -198,7 +202,7 @@ This runs:
 ## Default Credentials
 
 | Username | Password | Role  |
-|----------|----------|-------|
+| -------- | -------- | ----- |
 | `admin`  | `vectra` | admin |
 
 > Seeded automatically on backend startup if the database is empty.
@@ -208,11 +212,13 @@ This runs:
 ## Running Tests
 
 Run backend tests:
+
 ```bash
 npm run test-backend
 ```
 
 Or directly using pytest inside the virtual environment:
+
 ```bash
 cd backend
 venv\Scripts\python -m pytest tests/ -v
@@ -223,33 +229,37 @@ venv\Scripts\python -m pytest tests/ -v
 ## API Overview
 
 ### Authentication
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/login` | Returns a signed JWT token and user role |
-| POST | `/api/auth/register` | Registers a new user with standard permissions |
+
+| Method | Endpoint             | Description                                    |
+| ------ | -------------------- | ---------------------------------------------- |
+| POST   | `/api/auth/login`    | Returns a signed JWT token and user role       |
+| POST   | `/api/auth/register` | Registers a new user with standard permissions |
 
 ### Inventory Items
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | `/api/items` | — | Paginated, filterable & searchable item list |
-| POST | `/api/items` | Admin | Create a new inventory item |
-| PUT | `/api/items/{id}` | Admin | Update item fields |
-| DELETE | `/api/items/{id}` | Admin | Delete item (cascades to transactions) |
-| GET | `/api/items/locations` | — | Retrieve distinct active locations |
-| GET | `/api/items/categories` | — | Retrieve distinct active categories |
+
+| Method | Endpoint                | Auth  | Description                                  |
+| ------ | ----------------------- | ----- | -------------------------------------------- |
+| GET    | `/api/items`            | —     | Paginated, filterable & searchable item list |
+| POST   | `/api/items`            | Admin | Create a new inventory item                  |
+| PUT    | `/api/items/{id}`       | Admin | Update item fields                           |
+| DELETE | `/api/items/{id}`       | Admin | Delete item (cascades to transactions)       |
+| GET    | `/api/items/locations`  | —     | Retrieve distinct active locations           |
+| GET    | `/api/items/categories` | —     | Retrieve distinct active categories          |
 
 ### Stock Transactions
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | `/api/issues` | — | Paginated transaction history (newest first) |
-| POST | `/api/issues` | — | Issue stock (deducts qty) or Replenish stock (adds qty) |
-| PUT | `/api/issues/{id}` | — | Adjust a past transaction quantity |
-| DELETE | `/api/issues/{id}` | — | Remove transaction logs |
+
+| Method | Endpoint           | Auth | Description                                             |
+| ------ | ------------------ | ---- | ------------------------------------------------------- |
+| GET    | `/api/issues`      | —    | Paginated transaction history (newest first)            |
+| POST   | `/api/issues`      | —    | Issue stock (deducts qty) or Replenish stock (adds qty) |
+| PUT    | `/api/issues/{id}` | —    | Adjust a past transaction quantity                      |
+| DELETE | `/api/issues/{id}` | —    | Remove transaction logs                                 |
 
 ### Dashboard Metrics
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | `/api/dashboard/stats` | — | Summary numbers for UI stat cards |
+
+| Method | Endpoint               | Auth | Description                       |
+| ------ | ---------------------- | ---- | --------------------------------- |
+| GET    | `/api/dashboard/stats` | —    | Summary numbers for UI stat cards |
 
 Full interactive API documentation is available at `/docs` (Swagger UI) or `/redoc` (ReDoc) of the running backend server.
 
@@ -258,9 +268,11 @@ Full interactive API documentation is available at `/docs` (Swagger UI) or `/red
 ## Deployment
 
 ### Containerization (Docker)
+
 Create a production container layout:
 
 1. **Backend Dockerfile** (`backend/Dockerfile`):
+
    ```dockerfile
    FROM python:3.12-slim
    WORKDIR /app
@@ -272,6 +284,7 @@ Create a production container layout:
    ```
 
 2. **Frontend Dockerfile** (`frontend/Dockerfile`):
+
    ```dockerfile
    FROM node:18-alpine as build
    WORKDIR /app
