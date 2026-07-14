@@ -20,22 +20,17 @@ const Login = ({ setUser }) => {
 
         try {
             const res = await api.post(endpoint, {
-            username,
-            password,
-        });
+                username,
+                password,
+            });
 
-        const data = res.data;
-            
-            if (!res.ok) {
-                setError(data.error || "An error occurred");
-                setIsLoading(false);
-                return;
-            }
+            const data = res.data;
 
             if (isLogin) {
-                // Save token in localstorage
+                // Save token and user details in localstorage
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("role", data.role);
+                localStorage.setItem("username", username);
                 setUser({ username, role: data.role, token: data.token });
             } else {
                 setSuccessMsg("Registration successful! Please login.");
