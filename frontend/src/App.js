@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import './App.css';
 import ItemForm from "./Components/ItemForm";
 import ItemList from "./Components/ItemList";
@@ -39,12 +39,12 @@ function App() {
 
   const itemsPerPage = 20;
 
-  const showToast = (message, type = "success") => {
-    setToast({ message, type });
-    setTimeout(() => setToast(null), 3000);
-  };
+  const showToast = useCallback((message, type = "success") => {
+  setToast({ message, type });
+  setTimeout(() => setToast(null), 3000);
+}, []);
 
-  const fetchItems = async (pageArg, searchArg, categoryArg, locationArg, statusArg) => {
+  const fetchItems = useCallback(async (pageArg, searchArg, categoryArg, locationArg, statusArg) => {
     const page = pageArg !== undefined ? pageArg : currentPage;
     const search = searchArg !== undefined ? searchArg : searchTerm;
     const category = categoryArg !== undefined ? categoryArg : selectedCategory;
@@ -69,7 +69,14 @@ function App() {
     } finally {
       setIsLoading(false);
     }
-  };
+ }, [
+  currentPage,
+  searchTerm,
+  selectedCategory,
+  selectedLocation,
+  selectedStatus,
+  showToast,
+]);
 
   const fetchDashboardData = async () => {
     try {
@@ -96,11 +103,10 @@ function App() {
       console.error("Error fetching filter options:", err);
     }
   };
-// eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    fetchItems();
-    fetchDashboardData();
-  }, [currentPage, selectedCategory, selectedLocation, selectedStatus]);
+useEffect(() => {
+  fetchItems();
+  fetchDashboardData();
+}, [fetchItems, currentPage, selectedCategory, selectedLocation, selectedStatus]);
 
   useEffect(() => {
     fetchFilterOptions();
@@ -186,15 +192,6 @@ function App() {
     }
   };
 
-  const escapeCSVValue = (val) => {
-    if (val === null || val === undefined) return "";
-    const str = String(val);
-    if (str.includes(",") || str.includes("\"") || str.includes("\n") || str.includes("\r")) {
-      return `"${str.replace(/"/g, '""')}"`;
-    }
-    return str;
-  };
-
 
   return (
     <div className="dashboard-wrapper">
@@ -209,20 +206,20 @@ function App() {
           <img src={logo} alt="StockSphere Logo" className="nav-logo" />
         </div>
         <div className="nav-links">
-          <a
-            href="#"
-            className={view === 'dashboard' ? 'active' : ''}
-            onClick={(e) => { e.preventDefault(); setView('dashboard'); }}
+          <button
+          type="button"
+          className={view === 'dashboard' ? 'active nav-link-btn' : 'nav-link-btn'}
+          onClick={() => setView('dashboard')}
           >
-            Dashboard
-          </a>
-          <a
-            href="#"
-            className={view === 'issueHistory' ? 'active' : ''}
-            onClick={(e) => { e.preventDefault(); setView('issueHistory'); }}
-          >
+          Dashboard
+          </button>
+          <button
+          type="button"
+          className={view === 'issueHistory' ? 'active nav-link-btn' : 'nav-link-btn'}
+          onClick={() => setView('issueHistory')}
+      >
             History
-          </a>
+          </button>
           <button className="logout-btn" onClick={() => setShowLoginModal(true)}>Login</button>
           <button className="logout-btn" onClick={() => { localStorage.clear(); window.location.reload(); }}>Logout</button>
         </div>
