@@ -31,7 +31,7 @@ function App() {
   const [showIssueModal, setShowIssueModal] = useState(false);
   const [showReplenishModal, setShowReplenishModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [recentIssues, setRecentIssues] = useState([]); // Kept for potential future use or if needed by IssueHistory prop
+  const [, setRecentIssues] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [toast, setToast] = useState(null);
   const [view, setView] = useState("dashboard");
@@ -96,7 +96,7 @@ function App() {
       console.error("Error fetching filter options:", err);
     }
   };
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchItems();
     fetchDashboardData();
@@ -195,32 +195,6 @@ function App() {
     return str;
   };
 
-  const exportToCSV = () => {
-    const headers = ["ID", "Name", "Make", "Material Code", "Quantity", "Location", "Category"];
-    const rows = items.map(i => [
-      i.id,
-      i.name,
-      i.make,
-      i.material_code,
-      i.quantity,
-      i.location,
-      i.category
-    ]);
-
-    const csvContent = [
-      headers.join(","),
-      ...rows.map(r => r.map(escapeCSVValue).join(","))
-    ].join("\n");
-
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.setAttribute("href", url);
-    link.setAttribute("download", `stocksphere_report_${new Date().toLocaleDateString()}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   return (
     <div className="dashboard-wrapper">
